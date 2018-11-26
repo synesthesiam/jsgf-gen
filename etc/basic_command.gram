@@ -1,0 +1,10 @@
+#JSGF V1.0;
+grammar basic_command;
+
+public <basicCmd> = <startPolite> <command>;
+
+<command> = <action> <object>;
+<action> = (open | close) {action};
+<object> = [the | a] (window | file) {object};
+
+<startPolite> = (please | kindly | could you | oh mightly computer);
