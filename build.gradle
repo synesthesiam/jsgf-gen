@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+dependencies {
+  // Use local dependencies in /lib
+  compile fileTree(dir: 'lib', include: ['*.jar'])
+}
+
+// ----------------------------------------------------------------------------
+
+archivesBaseName = 'jsgf-gen'
+version '1.0'
+mainClassName = 'com.synesthesiam.jsgf.JsgfGen'
+sourceCompatibility = 1.8
