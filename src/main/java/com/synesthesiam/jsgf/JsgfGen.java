@@ -243,39 +243,46 @@ public class JsgfGen {
   private static String makeTaggedSentence(JSGFRule component,
                                            Function<TagInfo, String> tagHandler) {
     StringBuilder sb = new StringBuilder();
-    makeTaggedSentence(component, tagHandler, sb);
+    makeTaggedSentence(component, tagHandler, sb, true);
     return sb.toString().trim();
   }
 
   private static void makeTaggedSentence(JSGFRule component,
                                          Function<TagInfo, String> tagHandler,
-                                         StringBuilder sb) {
-    if (component instanceof JSGFRuleTag) {
+                                         StringBuilder sb,
+                                         boolean includeTags) {
+
+    if (includeTags && (component instanceof JSGFRuleTag)) {
       final JSGFRuleTag tag = (JSGFRuleTag) component;
       final String tagName = tag.getTag();
       final StringBuilder tagSB = new StringBuilder();
-      makeTaggedSentence(tag.getRule(), tagHandler, tagSB);
-      TagInfo info = new TagInfo();
-      info.tagName = tagName;
-      info.taggedText = tagSB.toString().trim();
-      sb.append(tagHandler.apply(info));
+      makeTaggedSentence(tag.getRule(), tagHandler, tagSB, false);
+
+      if (includeTags) {
+        TagInfo info = new TagInfo();
+        info.tagName = tagName;
+        info.taggedText = tagSB.toString().trim();
+        sb.append(tagHandler.apply(info));
+      } else {
+        sb.append(tagSB.toString());
+      }
     } else if (component instanceof JSGFRuleAlternatives) {
       final JSGFRuleAlternatives alternatives = (JSGFRuleAlternatives) component;
       for (JSGFRule rule : alternatives.getRules()) {
-        makeTaggedSentence(rule, tagHandler, sb);
+        makeTaggedSentence(rule, tagHandler, sb, includeTags);
       }
     } else if (component instanceof JSGFRuleCount) {
       final JSGFRuleCount count = (JSGFRuleCount) component;
       final JSGFRule actComponent = count.getRule();
-      makeTaggedSentence(actComponent, tagHandler, sb);
+      makeTaggedSentence(actComponent, tagHandler, sb, includeTags);
     } else if (component instanceof RuleParse) {
       final RuleParse parse = (RuleParse) component;
       final JSGFRule actComponent = parse.getParse();
-      makeTaggedSentence(actComponent, tagHandler, sb);
+      makeTaggedSentence(actComponent, tagHandler, sb, includeTags);
     } else if (component instanceof JSGFRuleSequence) {
       final JSGFRuleSequence sequence = (JSGFRuleSequence) component;
       for (JSGFRule rule : sequence.getRules()) {
-        makeTaggedSentence(rule, tagHandler, sb);
+        makeTaggedSentence(rule, tagHandler, sb, includeTags);
       }
     } else if (component instanceof JSGFRuleToken) {
       final JSGFRuleToken token = (JSGFRuleToken)component;
