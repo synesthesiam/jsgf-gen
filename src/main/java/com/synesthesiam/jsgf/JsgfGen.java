@@ -252,7 +252,7 @@ public class JsgfGen {
                                          StringBuilder sb,
                                          boolean includeTags) {
 
-    if (includeTags && (component instanceof JSGFRuleTag)) {
+    if (component instanceof JSGFRuleTag) {
       final JSGFRuleTag tag = (JSGFRuleTag) component;
       final String tagName = tag.getTag();
       final StringBuilder tagSB = new StringBuilder();
@@ -264,7 +264,7 @@ public class JsgfGen {
         info.taggedText = tagSB.toString().trim();
         sb.append(tagHandler.apply(info));
       } else {
-        sb.append(tagSB.toString());
+        sb.append(tagSB.toString().trim());
       }
     } else if (component instanceof JSGFRuleAlternatives) {
       final JSGFRuleAlternatives alternatives = (JSGFRuleAlternatives) component;
