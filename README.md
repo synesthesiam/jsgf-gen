@@ -8,7 +8,7 @@ All credit for tag support goes to [candrews](https://github.com/candrews). See 
 Building
 --------
 
-Run `make` in the root or `gradle installDist`.
+Run `make` in the root or `gradle installDist`. The `jsgf-gen` command and required libraries will be place in the `build/install/jsgf-gen` directory by Gradle. You can run the command directly from there with `build/install/jsgf-gen/bin/jsgf-gen ...`
 
 Generating Sentences
 ------------------------
