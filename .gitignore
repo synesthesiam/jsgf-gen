@@ -1,2 +1,5 @@
 .gradle/
 build/
+deb/*.deb
+jsgf-gen.tar.gz
+deb/jsgf-gen-1.0/usr/lib/jsgf-gen

@@ -1,0 +1,5 @@
+Package: jsgf-gen
+Version: 1.0
+Maintainer: Michael Hansen <hansen.mike@gmail.com>
+Architecture: all
+Description: Sentence generator for JSGF grammars
